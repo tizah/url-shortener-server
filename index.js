@@ -1,16 +1,10 @@
 const express = require('express');
-//const routes = require('./routes');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const shortid = require('shortid');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-const validUrl = require('valid-url');
-const urlModel = require('./models/url');
-const baseUrl = process.env.BASE_URL_DEV;
-const Url = require('./models/url');
 
 const app = express();
 
@@ -33,31 +27,9 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true}, func
 });
 
 //routes(app);
-app.use('/', require('./routes/index'));
+app.use('/api/url', require('./routes/index'));
 app.use('/api/url', require('./routes/url'));
-app.get('/get', async (req,res) => {
-    try {
-         const result =  await Url.collection('urls').find({});
-         console.log({result})
-         res.send(result)
-         //result.then(x => )
-        //console.log({result})
-        // if (result) {
-        //    // get all results here
-        //     return res.status(200).json(result); 
-        // } else {
-        //     res.status(401).json('not result')
-        // }
-    } catch (error) {
-        console.log('bad')
-        console.log(error);
-        res.status(500).json('Server error ' + error);
-    }
-})
 
-// app.get('/', (req, res) => {
-//     res.json({ message: "Welcome to url shortener API"});
-// });
 
 const port = process.env.PORT || 4000;
 
