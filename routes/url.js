@@ -63,7 +63,7 @@ router.post('/shorten', async (req,res) => {
 router.get('/',  async (req, res) => {
 
      try {
-         const result =  await Url.find({});
+         const result =  await Url.find({}).sort({_id:-1}) ;
          if (result) {
             console.log(result);
         //    // get all results here
