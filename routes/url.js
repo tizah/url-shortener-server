@@ -8,7 +8,7 @@ require('dotenv').config();
 //const config = require('cofig');
 
 const Url = require('../models/url');
-const baseUrl = process.env.BASE_URL_DEV;
+const baseUrl = process.env.BASE_URL_PROD ||process.env.BASE_URL_DEV;
 
 // @route POST /api/url/shorten
 // @desc create a short url
